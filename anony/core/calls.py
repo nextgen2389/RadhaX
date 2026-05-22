@@ -64,13 +64,13 @@ class TgCall(PyTgCalls):
             return await self.play_next(chat_id)
 
         stream = (
-            types.AudioPiped(
+            AudioPiped(
                 media.file_path,
                 audio_parameters=HighQualityAudio(),
                 additional_ffmpeg_parameters=f"-ss {seek_time}" if seek_time > 1 else None,
             )
             if not media.video else
-            types.AudioVideoPiped(
+            AudioVideoPiped(
                 media.file_path,
                 audio_parameters=HighQualityAudio(),
                 video_parameters=MediumQualityVideo(),

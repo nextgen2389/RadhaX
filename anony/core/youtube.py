@@ -13,7 +13,7 @@ from pathlib import Path
 
 from py_yt import Playlist, VideosSearch
 
-from anony import logger
+from anony import config, logger
 from anony.helpers import NexGenApi, Track, utils
 
 
