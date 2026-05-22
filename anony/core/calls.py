@@ -7,7 +7,7 @@ from pyrogram.errors import (ChatSendMediaForbidden, ChatSendPhotosForbidden,
                              MessageIdInvalid)
 from pyrogram.types import InputMediaPhoto, Message
 
-from pytgcalls import PyTgCalls, StreamType, exceptions, types
+from pytgcalls import PyTgCalls, exceptions, types
 from pytgcalls.types.stream import StreamAudioEnded
 from pytgcalls.types.input_stream import AudioPiped, AudioVideoPiped
 from pytgcalls.types.input_stream.quality import HighQualityAudio, MediumQualityVideo
@@ -81,14 +81,11 @@ class TgCall(PyTgCalls):
         try:
             if not await db.get_call(chat_id):
                 await client.join_group_call(
-                    chat_id,
-                    stream,
-                    stream_type=StreamType().pulse_stream,
+                    chat_id, stream,
                 )
             else:
                 await client.change_stream(
-                    chat_id,
-                    stream,
+                    chat_id, stream,
                 )
 
             if not seek_time:
