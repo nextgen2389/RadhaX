@@ -36,7 +36,7 @@ class YouTube:
             r"|playlist\?list=PL[A-Za-z0-9_-]+|[A-Za-z0-9_-]{11}))\S*"
         )
         if config.API_URL and config.VIDEO_API_URL and config.API_KEY:
-            self.api = NexGenApi(config.API_URL, config.VIDEO_API_URL, config.API_KEY)
+            self.api = NexGenApi(config.API_URL, config.API_KEY, config.VIDEO_API_URL)
 
     def get_cookies(self):
         if not self.checked:
