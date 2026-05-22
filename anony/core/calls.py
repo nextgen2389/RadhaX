@@ -63,18 +63,19 @@ class TgCall(PyTgCalls):
             await message.edit_text(_lang["error_no_file"].format(config.SUPPORT_CHAT))
             return await self.play_next(chat_id)
 
+        kwargs = {"audio_parameters": HighQualityAudio()}
+        if seek_time > 1:
+            kwargs["additional_ffmpeg_parameters"] = f"-ss {seek_time}"
+
         stream = (
             AudioPiped(
-                media.file_path,
-                audio_parameters=HighQualityAudio(),
-                additional_ffmpeg_parameters=f"-ss {seek_time}" if seek_time > 1 else None,
+                media.file_path, **kwargs,
             )
             if not media.video else
             AudioVideoPiped(
                 media.file_path,
-                audio_parameters=HighQualityAudio(),
                 video_parameters=MediumQualityVideo(),
-                additional_ffmpeg_parameters=f"-ss {seek_time}" if seek_time > 1 else None,
+                **kwargs,
             )
         )
 
